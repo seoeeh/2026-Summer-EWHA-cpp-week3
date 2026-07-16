@@ -27,10 +27,14 @@ namespace ParkSeohee2114012
         void setHour(int h) {hour = h; testHour();}
         void setMinute(int m) { minute = m; testMinute();}
         void print() const  {
-                if (hour < 10) std::cout << "0";
-                std::cout << hour << ":"; 
-                if (minute < 10) std::cout << "0";
-                std::cout << minute;}
+          os << std::setw(2) << std::setfill('0') << hour << ":";
+          os << std::setw(2) << std::setfill('0') << minute;
+        }
+        
+                // if (hour < 10) std::cout << "0";
+                // std::cout << hour << ":"; 
+                // if (minute < 10) std::cout << "0";
+                // std::cout << minute;}
         int getHour() const {return hour;}
         int getMinute() const {return minute;}
 
@@ -65,8 +69,11 @@ namespace ParkSeohee2114012
       friend std::ostream& operator<<(std::ostream& os, const timeOfDay& t)
       { //std::cout (print()) -->os
         //std::cout (print()) --> os
-        if (t.hour < 10) os << "0"; os << t.hour << ":";
-        if (t.minute < 10) os << "0"; os << t.minute;
+        //if (t.hour < 10) os << "0"; os << t.hour << ":";
+        //if (t.minute < 10) os << "0"; os << t.minute;
+        os.width(2);
+        os.fill('0');
+        os << t.hour << ":";
         return os;
       }
       friend bool operator==(const timeOfDay& t1, const timeOfDay& t2)
