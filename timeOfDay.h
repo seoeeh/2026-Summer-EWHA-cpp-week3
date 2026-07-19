@@ -31,7 +31,7 @@ namespace ParkSeohee2114012
         void print() const  {
             if (hour < 10) std::cout << "0";
             std::cout << hour << ":";
-            if (minute  10) std::cout << "0";
+            if (minute < 10) std::cout << "0";
             std::cout << minute;
         //  std::cout << std::setw(2) << std::setfill('0') << hour << ":";
         //  std::cout << std::setw(2) << std::setfill('0') << minute;
@@ -68,15 +68,20 @@ namespace ParkSeohee2114012
       friend std::istream& operator>>(std::istream& is, timeOfDay& t)
       {
         //std::cin (input()) --> is
-        std::cout << "Enter hour(0~23): "; is >> t.hour; t.testHour();
-        std::cout << "Enter minute(0~59): "; is >> t.minute; t.testMinute();
+       // std::cout << "Enter hour(0~23): "; 
+        is >> t.hour; 
+        t.testHour();
+        //std::cout << "Enter minute(0~59): "; 
+        is >> t.minute; 
+        t.testMinute();
         return is;
       } 
       friend std::ostream& operator<<(std::ostream& os, const timeOfDay& t)
       { //std::cout (print()) -->os
-        //std::cout (print()) --> os
-        if (t.hour < 10) os << "0"; os << t.hour << ":";
-        if (t.minute < 10) os << "0"; os << t.minute;
+        os.width(2); os.fill('0');   //if (t.hour < 10) os << "0"; 
+        os << t.hour << ":"; //if (t.minute < 10) os << "0"; 
+        os << std::setw(2) << std::setfill('0') << t.minute;
+       
         // os.width(2);
         // os.fill('0');
         // os << t.hour << ":";
