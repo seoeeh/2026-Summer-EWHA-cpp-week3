@@ -28,19 +28,11 @@ namespace ParkSeohee2114012
         }
         void setHour(int h) {hour = h; testHour();}
         void setMinute(int m) { minute = m; testMinute();}
-        void print() const  {
-            if (hour < 10) std::cout << "0";
-            std::cout << hour << ":";
-            if (minute < 10) std::cout << "0";
-            std::cout << minute;
-        //  std::cout << std::setw(2) << std::setfill('0') << hour << ":";
-        //  std::cout << std::setw(2) << std::setfill('0') << minute;
+        void print(std::ostream& os = std::cout) const  {
+             os << std::setw(2) << std::setfill('0') << hour << ":";
+             os << std::setw(2) << std::setfill('0') << minute;
         }
-        
-                // if (hour < 10) std::cout << "0";
-                // std::cout << hour << ":"; 
-                // if (minute < 10) std::cout << "0";
-                // std::cout << minute;}
+
         int getHour() const {return hour;}
         int getMinute() const {return minute;}
 
@@ -68,28 +60,16 @@ namespace ParkSeohee2114012
       friend std::istream& operator>>(std::istream& is, timeOfDay& t)
       {
         //std::cin (input()) --> is
-       // std::cout << "Enter hour(0~23): "; 
+        std::cout << "Enter hour(0~23): "; 
         is >> t.hour; 
         t.testHour();
-        //std::cout << "Enter minute(0~59): "; 
+        std::cout << "Enter minute(0~59): "; 
         is >> t.minute; 
         t.testMinute();
         return is;
       } 
       friend std::ostream& operator<<(std::ostream& os, const timeOfDay& t)
-      { //std::cout (print()) -->os
-        os.width(2); os.fill('0');   //if (t.hour < 10) os << "0"; 
-        os << t.hour << ":"; //if (t.minute < 10) os << "0"; 
-        os << std::setw(2) << std::setfill('0') << t.minute;
-       
-        // os.width(2);
-        // os.fill('0');
-        // os << t.hour << ":";
-
-        // os.width(2);
-        // os.fill('0');
-        // os << t.minute;
-
+      { t.print(os);
         return os;
       }
       friend bool operator==(const timeOfDay& t1, const timeOfDay& t2)

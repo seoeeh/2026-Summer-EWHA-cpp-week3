@@ -20,7 +20,7 @@ namespace ParkSeohee2114012
         friend std::ostream& operator << (std::ostream& os, const alarm& a)
         {
             os << a.name << " ";
-            os << a.wakeTime << " ";
+            os << a.wakeTime << " "; //timeOfDay의 출력연산자
             os << "alarm is " << ((a.inActive) ? "on" : "off") << '\n'; 
             return os;
         }

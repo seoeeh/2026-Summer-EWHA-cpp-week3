@@ -2,6 +2,8 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include "alarm.h"
+#include <sstream>
 
 namespace ParkSeohee2114012
 {
@@ -17,21 +19,32 @@ namespace ParkSeohee2114012
      {
         std::vector<timeOfDay> v;
          timeOfDay t;
-         while (fin >> t)
+
+        std::streambuf* origbuf{std::cout.rdbuf()};
+        std::cout.rdbuf(nullptr);         
+         while (fin >> t) //timeOfDay의 입력연산자
             v.push_back(t);
+        std::cout.rdbuf(origbuf);  
         for (const auto& vi : v)
             fout << vi << '\n';
     }
-//     void parsingAlarm(std::iostream& io)   
-//     public 
-//     {
-//         getHour
-//         getMinute
-//         setHour
-//         setMinute
-//     }
-}
+    //std::iostream -> std::stringstream
+    //              -> std::fstream
+    void parsingAlarm(std::iostream& io)   
+    {
+        alarm a;
 
+        std::streambuf* origbuf{std::cout.rdbuf()};
+        std::cout.rdbuf(nullptr);
+        io >> a; //alarm의 입력연산자
+        std::cout.rdbuf(origbuf);
+
+        io.clear();
+        io.seekp(0, std::ios::end);
+
+        io << a; //alarm의 출력연산자
+    }
+}
 
 
 int main()
@@ -52,35 +65,51 @@ int main()
     // v.push_back(std::move(ta1));printTimeArrayVector(v);
     // ta1.printAll();
 
-    std::ifstream fin{"timeData.txt"};
-    if (fin.fail())//if(!fin)
-    {
-        std::cout << "input file open failed\n";
-        std::exit(1);
-    }
-    std::ofstream fout;
-    std::string filename;
+    // std::ifstream fin{"timeData.txt"};
+    // if (fin.fail())//if(!fin)
+    // {
+    //     std::cout << "input file open failed\n";
+    //     std::exit(1);
+    // }
 
-    std::cout << "Enter out file name: ";
-    std::cin >> filename;
+    // std::ofstream fout;
+    // std::string filename;
 
-    fout.open(filename + ".txt");
+    // std::cout << "Enter out file name: ";
+    // std::cin >> filename;
+
+    // fout.open(filename + ".txt");
 
 
-    if (fout.fail())//if(!fin)
-    {
-        std::cout << "output file open failed\n";
-        std::exit(1);
-    }
+    // if (fout.fail())//if(!fin)
+    // {
+    //     std::cout << "output file open failed\n";
+    //     std::exit(1);
+    // }
 
     // timeOfDay t;
     // fin >> t;
     // fout << t <<  std::endl;
 
 
-    readWriteTimeFile(fin, fout);
+    // readWriteTimeFile(fin, fout);
 
-    fin.close();
-    fout.close();
+    // fin.close();
+    // fout.close();
+
+    std::stringstream ss;
+    std::string ad{"morning\n7 0\n1\n"};
+    ss << ad; //std::cout << ad;
+    parsingAlarm(ss); //io = ss;
+    std::cout << ss.str() << '\n';
+
+    std::fstream fs{"alarmData.txt"};
+    if (fs.fail())//if(!fin)
+    {
+        std::cout << "file open failed\n";
+        std::exit(1);
+    }
+    parsingAlarm(fs);
+    
     return 0;
 }

@@ -1,0 +1,4 @@
+morning
+7 0
+1
+morning 07:00 alarm is on
