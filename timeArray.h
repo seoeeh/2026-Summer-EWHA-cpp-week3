@@ -19,34 +19,34 @@ namespace ParkSeohee2114012
             }
             else a = nullptr;
         }
-        timeArray(const timeArray& copy) : n(copy.n){
-            if (copy.a != nullptr) {
-                a= new timeOfDay[n];
-                for (int i = 0; i<n; ++i)
-                    a[i] = copy.a[i];
-            }
-            else a = nullptr;
-        }
+        // timeArray(const timeArray& copy) : n(copy.n){
+        //     if (copy.a != nullptr) {
+        //         a= new timeOfDay[n];
+        //         for (int i = 0; i<n; ++i)
+        //             a[i] = copy.a[i];
+        //     }
+        //     else a = nullptr;
+        // }
 
         timeArray& operator=(const timeArray& copy){
             if (this != &copy){
                 n = copy.n;
                 delete[] a;
                 if (copy.a != nullptr){//if (copy.a)
-                    a = new timeOfDay
-                for (int i = 0; i<n; ++i)
-                    a[i] = copy.a[i];//*(a+i) = *(copy.a+i);           }
-            else a = nullptr;
+                    a = new timeOfDay;
+                    for (int i = 0; i<n; ++i)
+                        a[i] = copy.a[i];//*(a+i) = *(copy.a+i);           }
                 }
+                else a = nullptr;
+                
             }
             return *this;
         }
         timeArray(timeArray&& move) noexcept
             :n{move.n}, a{move.a}{
-                move.n = 0; move.a = nullptr;
+            move.n = 0; move.a = nullptr;
             }
 
-        }
         timeArray& operator=(timeArray&& move) noexcept{
             if (this != &move){
                 delete[] a;

@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <iomanip>
+
 namespace ParkSeohee2114012
 {
     class timeOfDay
@@ -27,8 +29,8 @@ namespace ParkSeohee2114012
         void setHour(int h) {hour = h; testHour();}
         void setMinute(int m) { minute = m; testMinute();}
         void print() const  {
-          os << std::setw(2) << std::setfill('0') << hour << ":";
-          os << std::setw(2) << std::setfill('0') << minute;
+         std::cout << std::setw(2) << std::setfill('0') << hour << ":";
+          std::cout << std::setw(2) << std::setfill('0') << minute;
         }
         
                 // if (hour < 10) std::cout << "0";
@@ -74,6 +76,11 @@ namespace ParkSeohee2114012
         os.width(2);
         os.fill('0');
         os << t.hour << ":";
+
+        os.width(2);
+        os.fill('0');
+        os << t.minute;
+
         return os;
       }
       friend bool operator==(const timeOfDay& t1, const timeOfDay& t2)

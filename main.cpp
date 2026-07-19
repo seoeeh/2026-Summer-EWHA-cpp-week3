@@ -25,7 +25,7 @@ namespace ParkSeohee2114012
 //         setHour
 //         setMinute
 //     }
-//    }
+}
 
 
 
@@ -47,17 +47,17 @@ int main()
     v.push_back(std::move(ta1));printTimeArrayVector(v);
     ta1.printAll();
 
-    std::ifstream fin{"timeData.txt"};
-    if (fin.fall())//if(!fin)
-    {
-        std::cout << "input file open failed\n";
-        std::exit(1);
-    }
-    std::ofstream fout;
-    std::string filename;
-    std::cout << "Enter out file name: ";
-    std::cin >> filename;
-    fout.open(filename + ".txt");
+    // std::ifstream fin{"timeData.txt"};
+    // if (fin.fall())//if(!fin)
+    // {
+    //     std::cout << "input file open failed\n";
+    //     std::exit(1);
+    // }
+    // std::ofstream fout;
+    // std::string filename;
+    // std::cout << "Enter out file name: ";
+    // std::cin >> filename;
+    // fout.open(filename + ".txt");
 
     return 0;
 }
